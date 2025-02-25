@@ -2,6 +2,9 @@
 
 A lightweight and customizable toast notification library for JavaScript with support for **success, error, info, warning, message descriptions, async promise handling**, and **positioning**.
 
+<a href="https://pkg-size.dev/@iamsabbir/nanotoast"><img src="https://pkg-size.dev/badge/install/15506" title="Install size for @iamsabbir/nanotoast"></a>
+<a href="https://pkg-size.dev/@iamsabbir/nanotoast"><img src="https://pkg-size.dev/badge/bundle/1819" title="Bundle size for @iamsabbir/nanotoast"></a>
+
 ## 🚀 Features
 
 ✅ Simple and easy-to-use API  
