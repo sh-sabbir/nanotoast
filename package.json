@@ -18,11 +18,13 @@
   ],
   "license": "MIT",
   "scripts": {
+    "init": "cp pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit && echo 'hook copied'",
     "test": "echo \"No test specified\" && exit 0",
     "build": "node build.js",
     "publish": "npm publish --access public"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0"
+    "esbuild": "^0.25.0",
+    "pre-commit": "^1.0.10"
   }
 }
