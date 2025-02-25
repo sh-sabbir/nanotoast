@@ -114,11 +114,11 @@ toast.error("Bottom Center", { position: "bottom-center" });
 ### Modify Styles via CSS
 You can customize styles by overriding the default CSS.
 ```css
-.NanoToast.success {
+.nanotoast.success {
   background: #28a745; /* Change success color */
 }
 
-.NanoToast {
+.nanotoast {
   font-size: 16px;
   border-radius: 8px;
 }
