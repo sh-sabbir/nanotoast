@@ -1,5 +1,5 @@
 {
-  "name": "nanotoast",
+  "name": "@iamsabbir/nanotoast",
   "version": "0.0.1",
   "description": "A lightweight toast notification library for JavaScript with success, error, info, warning, and promise-based toasts.",
   "author": "Sabbir Hasan <sabbirshouvo@gmail.com>",
