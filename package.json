@@ -24,7 +24,6 @@
     "publish": "npm publish --access public"
   },
   "devDependencies": {
-    "esbuild": "^0.25.0",
-    "pre-commit": "^1.0.10"
+    "esbuild": "^0.25.0"
   }
 }
