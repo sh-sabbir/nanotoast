@@ -1,0 +1,116 @@
+/* Toast container */
+#simple-toast-container {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  max-width: 350px;
+}
+
+/* Positions */
+#simple-toast-container.top-right {
+  top: 10px;
+  right: 10px;
+  align-items: flex-end;
+}
+#simple-toast-container.top-left {
+  top: 10px;
+  left: 10px;
+  align-items: flex-start;
+}
+#simple-toast-container.bottom-right {
+  bottom: 10px;
+  right: 10px;
+  align-items: flex-end;
+}
+#simple-toast-container.bottom-left {
+  bottom: 10px;
+  left: 10px;
+  align-items: flex-start;
+}
+
+/* NEW: Centered positions */
+#simple-toast-container.top-center {
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+#simple-toast-container.bottom-center {
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  align-items: center;
+}
+
+/* Toast message */
+.simple-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: #333;
+  color: white;
+  padding: 12px;
+  border-radius: 6px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Open state */
+.simple-toast.open {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icon */
+.simple-toast-icon {
+  font-size: 18px;
+}
+
+/* Message & Description */
+.simple-toast-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.simple-toast-message {
+  font-weight: bold;
+}
+
+.simple-toast-description {
+  font-size: 0.9rem;
+  color: #ddd;
+  margin-top: 3px;
+}
+
+/* Close button */
+.simple-toast-close {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: auto;
+}
+
+/* Toast Types */
+.simple-toast.loading {
+  background: #777;
+}
+.simple-toast.success {
+  background: #4caf50;
+}
+.simple-toast.error {
+  background: #f44336;
+}
+.simple-toast.warning {
+  background: #ff9800;
+}
+.simple-toast.info {
+  background: #2196f3;
+}

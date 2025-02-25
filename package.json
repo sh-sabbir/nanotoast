@@ -1,0 +1,13 @@
+{
+  "name": "simple-toast",
+  "version": "1.0.0",
+  "description": "A simple toast notification library for JavaScript",
+  "main": "src/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sh-sabbir/simple-toast"
+  },
+  "keywords": ["toast", "notification", "javascript", "ui"],
+  "author": "Sabbir Hasan",
+  "license": "MIT"
+}
