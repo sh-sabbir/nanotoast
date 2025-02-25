@@ -2,7 +2,7 @@ import "./styles.css";
 
 const FADE_DUR = 500;
 const DEFAULT_DISPLAY_DUR = 3000;
-const CONTAINER_ID = "simple-toast-container";
+const CONTAINER_ID = "nanotoast-container";
 let toastContain;
 
 // Default positions for toasts
@@ -12,11 +12,11 @@ function createToastContainer(position) {
   if (!toastContain) {
     toastContain = document.createElement("div");
     toastContain.id = CONTAINER_ID;
-    toastContain.classList.add("simple-toast-container", position);
+    toastContain.classList.add("nanotoast-container", position);
     document.body.appendChild(toastContain);
   } else {
     // Update position if already exists
-    toastContain.className = `simple-toast-container ${position}`;
+    toastContain.className = `nanotoast-container ${position}`;
   }
 }
 
@@ -32,7 +32,7 @@ function showToast(message, type = "info", options = {}) {
   createToastContainer(position);
 
   const EL = document.createElement("div");
-  EL.classList.add("simple-toast", type);
+  EL.classList.add("nanotoast", type);
   EL.innerHTML = getToastHTML(message, description, type, closeable);
 
   if (id) EL.dataset.id = id; // Attach ID for updating
@@ -46,7 +46,7 @@ function showToast(message, type = "info", options = {}) {
   }
 
   if (closeable) {
-    EL.querySelector(".simple-toast-close").addEventListener("click", () => {
+    EL.querySelector(".nanotoast-close").addEventListener("click", () => {
       EL.classList.remove("open");
       setTimeout(() => EL.remove(), FADE_DUR);
     });
@@ -63,12 +63,12 @@ function getToastHTML(message, description, type, closeable) {
   };
 
   return `
-    <div class="simple-toast-icon">${icons[type] || "🔔"}</div>
-    <div class="simple-toast-content">
-      <div class="simple-toast-message">${message}</div>
-      ${description ? `<div class="simple-toast-description">${description}</div>` : ""}
+    <div class="nanotoast-icon">${icons[type] || "🔔"}</div>
+    <div class="nanotoast-content">
+      <div class="nanotoast-message">${message}</div>
+      ${description ? `<div class="nanotoast-description">${description}</div>` : ""}
     </div>
-    ${closeable ? '<button class="simple-toast-close">✖</button>' : ""}
+    ${closeable ? '<button class="nanotoast-close">✖</button>' : ""}
   `;
 }
 
@@ -91,7 +91,7 @@ function toastPromise(promise, { loading, success, error }) {
 
 // === UPDATE TOAST FUNCTION ===
 function updateToast(id, message, type) {
-  const toastEl = document.querySelector(`.simple-toast[data-id="${id}"]`);
+  const toastEl = document.querySelector(`.nanotoast[data-id="${id}"]`);
   if (toastEl) {
     toastEl.innerHTML = getToastHTML(message, "", type, false);
     toastEl.classList.remove("loading");
