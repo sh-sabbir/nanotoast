@@ -18,28 +18,28 @@ A lightweight and customizable toast notification library for JavaScript with su
 
 ### Using NPM
 ```sh
-npm install nanotoast
+npm install @iamsabbir/nanotoast
 ```
 
 ### Using Yarn
 ```sh
-yarn add nanotoast
+yarn add @iamsabbir/nanotoast
 ```
 
 ### Using a CDN (No installation required)
 ```html
-<script src="https://unpkg.com/nanotoast/dist/nanotoast.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/nanotoast/dist/nanotoast.min.css">
+<script src="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.min.css">
 ```
 
 ---
 
 ## 📌 Basic Usage
 
-### Import `nanotoast`
+### Import `@iamsabbir/nanotoast`
 ```js
-import toast from "nanotoast";
-import "nanotoast/src/styles.css"; // Ensure you import styles
+import toast from "@iamsabbir/nanotoast";
+import "@iamsabbir/nanotoast/src/styles.css"; // Ensure you import styles
 ```
 
 ### 🔥 Show a Basic Toast
@@ -68,7 +68,7 @@ toast.message("Event has been created", {
 Show a **loading** toast while a promise is in progress, then update it on success/error.
 ```js
 const fetchData = () =>
-  new Promise((resolve) => setTimeout(() => resolve({ name: "Sonner" }), 2000));
+  new Promise((resolve) => setTimeout(() => resolve({ name: "NanoToast" }), 2000));
 
 toast.promise(fetchData(), {
   loading: "Fetching data...",
@@ -168,7 +168,7 @@ const showToast = () => {
 ## 📜 License
 
 ```md
-MIT License © 2025 [Your Name] 🚀
+MIT License © 2025 [Sabbir Hasan] 🚀
 ```
 
 ---
