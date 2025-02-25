@@ -20,8 +20,7 @@
   "scripts": {
     "init": "cp pre-commit .git/hooks/ && chmod +x .git/hooks/pre-commit && echo 'hook copied'",
     "test": "echo \"No test specified\" && exit 0",
-    "build": "node build.js",
-    "publish": "npm publish --access public"
+    "build": "node build.js"
   },
   "devDependencies": {
     "esbuild": "^0.25.0"
