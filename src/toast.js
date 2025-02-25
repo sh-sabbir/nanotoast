@@ -26,7 +26,7 @@ function showToast(message, type = "info", options = {}) {
   const {
     duration = nanoToastDefaults.duration,
     position = nanoToastDefaults.position,
-    closeable = nanoToastDefaults.position,
+    closeable = nanoToastDefaults.closeable,
     description = "",
     id = null,
   } = options;

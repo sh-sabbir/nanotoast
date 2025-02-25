@@ -37,6 +37,22 @@ async function buildAll() {
       outfile: "dist/nanotoast.js",
       format: "iife",
       globalName: "NanoToast",
+      footer: {
+        js: `
+          (function() {
+            var realExport = NanoToast.default;
+            if (realExport) {
+              // Copy all own property names from NanoToast onto the function
+              Object.getOwnPropertyNames(NanoToast).forEach(function(key) {
+                if (key !== "default") {
+                  realExport[key] = NanoToast[key];
+                }
+              });
+              NanoToast = realExport;
+            }
+          })();
+        `,
+      },
     });
     await delay(500);
     spinner.succeed("IIFE/UMD bundle built successfully.");
