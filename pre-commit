@@ -1,0 +1,19 @@
+#!/bin/sh
+# pre-commit hook
+
+echo "Running npm run build..."
+
+# Run the build
+npm run build
+BUILD_EXIT_CODE=$?
+
+# Check if build exited successfully
+if [ $BUILD_EXIT_CODE -ne 0 ]; then
+  echo "Build failed. Aborting commit."
+  exit 1
+fi
+
+# Add new or changed build files
+git add dist/
+
+echo "Build succeeded, and dist/ folder has been added to commit."
