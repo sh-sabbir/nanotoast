@@ -28,8 +28,8 @@ yarn add nanotoast
 
 ### Using a CDN (No installation required)
 ```html
-<script src="https://unpkg.com/nanotoast/dist/index.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/nanotoast/dist/styles.css">
+<script src="https://unpkg.com/nanotoast/dist/nanotoast.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/nanotoast/dist/nanotoast.min.css">
 ```
 
 ---

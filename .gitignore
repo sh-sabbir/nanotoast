@@ -5,7 +5,6 @@ pnpm-lock.yaml
 yarn.lock
 
 # Build artifacts
-dist/
 *.log
 
 # IDE and Editor settings
