@@ -90,6 +90,17 @@ toast.promise(fetchData(), {
 
 ## 🎯 Customization Options
 
+### 🌟 Set default options
+All subsequent calls to `toast.*` will use these new defaults unless overridden locally.
+
+```js
+toast.configure({ 
+  position: "bottom-center", 
+  duration: 5000,
+  closeable: false,
+});
+```
+
 ### ⏱ Custom Duration
 ```js
 toast.success("Short message", { duration: 1500 }); // 1.5s
