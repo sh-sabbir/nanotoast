@@ -6,7 +6,7 @@ const CONTAINER_ID = "nanotoast-container";
 let toastContain;
 
 // Default positions for toasts
-const DEFAULT_POSITION = "top-center";
+const DEFAULT_POSITION = "top-right";
 
 function createToastContainer(position) {
   if (!toastContain) {

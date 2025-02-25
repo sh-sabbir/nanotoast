@@ -31,13 +31,19 @@ yarn add @iamsabbir/nanotoast
 
 ### Using a CDN (No installation required)
 ```html
-<script src="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.min.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.min.css">
+<!-- Add the javascript -->
+<script src="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.js"></script>
+<!-- Or if you want esm module -->
+<script src="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.esm.js"></script>
+
+<!-- Add the css -->
+<link rel="stylesheet" href="https://unpkg.com/@iamsabbir/nanotoast/dist/nanotoast.css">
 ```
 
 ---
 
 ## 📌 Basic Usage
+
 
 ### Import `@iamsabbir/nanotoast`
 ```js
@@ -135,6 +141,29 @@ You can customize styles by overriding the default CSS.
 ```js
 import toast from "nanotoast";
 toast.success("Hello, Vanilla JS!");
+```
+
+### or if you use regular build from `cdn`
+
+```js
+// Basic Toast
+NanoToast.toast("This is a simple toast!");
+
+// Success, Error, Warning, and Info Toasts
+NanoToast.toast.success("Action was successful!");
+NanoToast.toast.error("Something went wrong!");
+NanoToast.toast.warning("Warning: Low disk space!");
+NanoToast.toast.info("This is an info message.");
+
+// Promise
+const fetchData = () =>
+  new Promise((resolve) => setTimeout(() => resolve({ name: "NanoToast" }), 2000));
+
+NanoToast.toast.promise(fetchData(), {
+  loading: "Fetching data...",
+  success: (data) => `${data.name} has been loaded!`,
+  error: "Failed to fetch data",
+});
 ```
 
 ### ⚛️ **React**
