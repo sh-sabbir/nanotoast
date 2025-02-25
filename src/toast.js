@@ -1,12 +1,14 @@
 import "./styles.css";
 
+let nanoToastDefaults = {
+  position: "top-right",
+  duration: 3000,
+  closeable: false,
+};
+
 const FADE_DUR = 500;
-const DEFAULT_DISPLAY_DUR = 3000;
 const CONTAINER_ID = "nanotoast-container";
 let toastContain;
-
-// Default positions for toasts
-const DEFAULT_POSITION = "top-right";
 
 function createToastContainer(position) {
   if (!toastContain) {
@@ -22,10 +24,10 @@ function createToastContainer(position) {
 
 function showToast(message, type = "info", options = {}) {
   const {
+    duration = nanoToastDefaults.duration,
+    position = nanoToastDefaults.position,
+    closeable = nanoToastDefaults.position,
     description = "",
-    duration = DEFAULT_DISPLAY_DUR,
-    position = DEFAULT_POSITION,
-    closeable = false,
     id = null,
   } = options;
 
@@ -97,8 +99,8 @@ function updateToast(id, message, type) {
     toastEl.classList.remove("loading");
     toastEl.classList.add(type);
 
-    setTimeout(() => toastEl.classList.remove("open"), DEFAULT_DISPLAY_DUR);
-    setTimeout(() => toastEl.remove(), DEFAULT_DISPLAY_DUR + FADE_DUR);
+    setTimeout(() => toastEl.classList.remove("open"), nanoToastDefaults.duration);
+    setTimeout(() => toastEl.remove(), nanoToastDefaults.duration + FADE_DUR);
   }
 }
 
@@ -110,5 +112,14 @@ toast.warning = (message, options = {}) => showToast(message, "warning", options
 toast.info = (message, options = {}) => showToast(message, "info", options);
 toast.message = (message, options = {}) => showToast(message, "info", options);
 toast.promise = toastPromise;
+
+/**
+ * Configure default toast settings (position, duration, closeable, etc.).
+ * @param {Object} newDefaults - The new default settings to merge.
+ */
+toast.configure = function (newDefaults = {}) {
+  // Merge any new defaults
+  nanoToastDefaults = { ...nanoToastDefaults, ...newDefaults };
+};
 
 export default toast;
