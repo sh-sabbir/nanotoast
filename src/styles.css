@@ -1,5 +1,5 @@
 /* Toast container */
-#simple-toast-container {
+#nanotoast-container {
   position: fixed;
   z-index: 9999;
   display: flex;
@@ -10,36 +10,36 @@
 }
 
 /* Positions */
-#simple-toast-container.top-right {
+#nanotoast-container.top-right {
   top: 10px;
   right: 10px;
   align-items: flex-end;
 }
-#simple-toast-container.top-left {
+#nanotoast-container.top-left {
   top: 10px;
   left: 10px;
   align-items: flex-start;
 }
-#simple-toast-container.bottom-right {
+#nanotoast-container.bottom-right {
   bottom: 10px;
   right: 10px;
   align-items: flex-end;
 }
-#simple-toast-container.bottom-left {
+#nanotoast-container.bottom-left {
   bottom: 10px;
   left: 10px;
   align-items: flex-start;
 }
 
 /* NEW: Centered positions */
-#simple-toast-container.top-center {
+#nanotoast-container.top-center {
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
 }
 
-#simple-toast-container.bottom-center {
+#nanotoast-container.bottom-center {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -47,7 +47,7 @@
 }
 
 /* Toast message */
-.simple-toast {
+.nanotoast {
   display: flex;
   align-items: flex-start;
   gap: 10px;
@@ -62,34 +62,34 @@
 }
 
 /* Open state */
-.simple-toast.open {
+.nanotoast.open {
   opacity: 1;
   transform: translateY(0);
 }
 
 /* Icon */
-.simple-toast-icon {
+.nanotoast-icon {
   font-size: 18px;
 }
 
 /* Message & Description */
-.simple-toast-content {
+.nanotoast-content {
   display: flex;
   flex-direction: column;
 }
 
-.simple-toast-message {
+.nanotoast-message {
   font-weight: bold;
 }
 
-.simple-toast-description {
+.nanotoast-description {
   font-size: 0.9rem;
   color: #ddd;
   margin-top: 3px;
 }
 
 /* Close button */
-.simple-toast-close {
+.nanotoast-close {
   background: none;
   border: none;
   color: white;
@@ -99,18 +99,18 @@
 }
 
 /* Toast Types */
-.simple-toast.loading {
+.nanotoast.loading {
   background: #777;
 }
-.simple-toast.success {
+.nanotoast.success {
   background: #4caf50;
 }
-.simple-toast.error {
+.nanotoast.error {
   background: #f44336;
 }
-.simple-toast.warning {
+.nanotoast.warning {
   background: #ff9800;
 }
-.simple-toast.info {
+.nanotoast.info {
   background: #2196f3;
 }

@@ -1,13 +1,24 @@
 {
-  "name": "simple-toast",
+  "name": "nanotoast",
   "version": "1.0.0",
-  "description": "A simple toast notification library for JavaScript",
+  "description": "A lightweight toast notification library for JavaScript with success, error, info, warning, and promise-based toasts.",
   "main": "src/index.js",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sh-sabbir/simple-toast"
+    "url": "https://github.com/sh-sabbir/nanotoast"
   },
-  "keywords": ["toast", "notification", "javascript", "ui"],
-  "author": "Sabbir Hasan",
-  "license": "MIT"
+  "keywords": [
+    "toast",
+    "notification",
+    "javascript",
+    "ui",
+    "nanotoast"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "scripts": {
+    "test": "echo \"No test specified\" && exit 0",
+    "build": "npm run build",
+    "publish": "npm publish --access public"
+  }
 }
