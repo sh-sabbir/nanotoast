@@ -12,16 +12,16 @@
         console.log(NanoToast);
         switch (type) {
           case "success":
-            NanoToast.success("Success! Your data has been saved.");
+            NanoToast.success("Success! Your data has been saved.",{closeable: true, position: "top-center"});
             break;
           case "error":
-            NanoToast.error("Something went wrong! Try again.");
+            NanoToast.error("Something went wrong! Try again.",{closeable: true});
             break;
           case "warning":
-            NanoToast.warning("Warning! You're low on storage.");
+            NanoToast.warning("Warning! You're low on storage.",{closeable: true});
             break;
           case "info":
-            NanoToast.info("FYI: New features are available.");
+            NanoToast.info("FYI: New features are available.",{closeable: true});
             break;
           case "message":
             NanoToast.message("Event Created", {
