@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Demo</title>
+    <link rel="stylesheet" href="../dist/nanotoast.css" />
+
+    <script src="../dist/nanotoast.js"></script>
+    <script type="text/javascript">
+      window.showToast = function (type = "default") {
+        console.log(NanoToast);
+        switch (type) {
+          case "success":
+            NanoToast.success("Success! Your data has been saved.");
+            break;
+          case "error":
+            NanoToast.error("Something went wrong! Try again.");
+            break;
+          case "warning":
+            NanoToast.warning("Warning! You're low on storage.");
+            break;
+          case "info":
+            NanoToast.info("FYI: New features are available.");
+            break;
+          case "message":
+            NanoToast.message("Event Created", {
+              description: "Friday, July 14 @ 2:00 PM",
+              closeable: true,
+            });
+            break;
+          case "promise":
+            const fakePromise = new Promise((resolve, reject) => {
+              setTimeout(() => {
+                // 50% chance of success vs error
+                Math.random() < 0.5
+                  ? resolve({ name: "NanoToast" })
+                  : reject("fetch error");
+              }, 1500);
+            });
+            NanoToast.promise(fakePromise, {
+              loading: "Loading...",
+              success: (data) => `${data.name} loaded successfully!`,
+              error: "Failed to load data.",
+            });
+            break;
+          default:
+            NanoToast("Hello from NanoToast!");
+        }
+      };
+    </script>
+
+    <style>
+      /* ----- GLOBAL STYLES ----- */
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: sans-serif;
+        background: #fdfdfd;
+        color: #333;
+      }
+      a {
+        text-decoration: none;
+        color: #1d4ed8;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+
+      /* ----- NAVBAR ----- */
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background: #f3f4f6; /* Light gray */
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      .navbar-title {
+        font-weight: 600;
+        font-size: 1.25rem;
+      }
+      .navbar-links a {
+        margin-left: 1rem;
+        font-size: 0.9rem;
+        color: #374151;
+        transition: color 0.2s;
+      }
+      .navbar-links a:hover {
+        color: #1d4ed8;
+      }
+
+      /* ----- HERO SECTION ----- */
+      .hero {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 4rem 2rem;
+        background: linear-gradient(to bottom right, #eff6ff, #f8fafc);
+      }
+      .hero-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+      }
+      .hero-subtitle {
+        max-width: 600px;
+        margin-bottom: 2rem;
+        color: #4b5563;
+      }
+      .hero-btn {
+        padding: 0.75rem 1.25rem;
+        background: #3b82f6;
+        color: #fff;
+        border: none;
+        border-radius: 9999px;
+        font-size: 1rem;
+        cursor: pointer;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+        transition: background 0.2s;
+      }
+      .hero-btn:hover {
+        background: #2563eb;
+      }
+
+      /* ----- MAIN CONTENT ----- */
+      .container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      .section-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+      }
+      .buttons-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 1rem;
+        margin: 2rem 0;
+      }
+      .toast-btn {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+        border: none;
+        border-radius: 0.5rem;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .toast-btn:hover {
+        filter: brightness(0.9);
+      }
+
+      /* Different color buttons */
+      .toast-btn.success {
+        background: #4caf50; /* Green */
+      }
+      .toast-btn.error {
+        background: #f44336; /* Red */
+      }
+      .toast-btn.warning {
+        background: #ff9800; /* Orange */
+      }
+      .toast-btn.info {
+        background: #2196f3; /* Blue */
+      }
+      .toast-btn.message {
+        background: #9b5de5; /* Purple-ish */
+      }
+      .toast-btn.promise {
+        background: #374151; /* Gray */
+      }
+
+      /* Code blocks */
+      pre {
+        background: #f3f4f6;
+        padding: 1rem;
+        border-radius: 0.25rem;
+        overflow-x: auto;
+        font-size: 0.9rem;
+      }
+
+      /* ----- FOOTER ----- */
+      .footer {
+        text-align: center;
+        padding: 2rem;
+        background: #f3f4f6;
+        color: #6b7280;
+        font-size: 0.85rem;
+      }
+      .footer a {
+        color: #1d4ed8;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVBAR -->
+    <nav class="navbar">
+      <div class="navbar-title">@iamsabbir/nanotoast</div>
+      <div class="navbar-links">
+        <a href="https://github.com/yourusername/nanotoast" target="_blank"
+          >GitHub</a
+        >
+        <a href="#usage">Usage</a>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <h1 class="hero-title">Meet @iamsabbir/nanotoast</h1>
+      <p class="hero-subtitle">
+        A lightweight, delightful toast notification library for your JavaScript
+        projects.<br />
+        Supports success, error, warning, info, messages with description, and
+        promise-based toasts.
+      </p>
+      <button class="hero-btn" onclick="showToast()">Show Example Toast</button>
+    </section>
+
+    <!-- MAIN CONTENT -->
+    <main class="container">
+      <h2 id="usage" class="section-title">Usage Examples</h2>
+
+      <div class="buttons-grid">
+        <button class="toast-btn success" onclick="showToast('success')">
+          Success Toast
+        </button>
+        <button class="toast-btn error" onclick="showToast('error')">
+          Error Toast
+        </button>
+        <button class="toast-btn warning" onclick="showToast('warning')">
+          Warning Toast
+        </button>
+        <button class="toast-btn info" onclick="showToast('info')">
+          Info Toast
+        </button>
+        <button class="toast-btn message" onclick="showToast('message')">
+          Message + Desc
+        </button>
+        <button class="toast-btn promise" onclick="showToast('promise')">
+          Promise Toast
+        </button>
+      </div>
+
+      <!-- Installation -->
+      <h3 class="section-title">Installation</h3>
+      <pre>
+        npm install @iamsabbir/nanotoast
+        # or
+        yarn add @iamsabbir/nanotoast
+      </pre>
+
+      <!-- Usage -->
+      <h3 class="section-title">Usage</h3>
+      <pre>
+        import toast from "@iamsabbir/nanotoast";
+        import "@iamsabbir/nanotoast/dist/styles.css";
+        
+        toast.success("Hello from NanoToast!");
+      </pre>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      @iamsabbir/nanotoast - Lightweight JavaScript Toast Library<br />
+      Created by
+      <a href="https://github.com/iamsabbir" target="_blank">@iamsabbir</a>
+    </footer>
+  </body>
+</html>
