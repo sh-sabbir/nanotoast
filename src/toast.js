@@ -1,15 +1,65 @@
+/**
+ * @fileoverview Toast notification system for displaying messages with various states.
+ *
+ * This module provides functions to display and update toast notifications.
+ * It includes methods for default toasts, success, error, warning, info, and promise-based notifications.
+ *
+ * @module toast
+ * @version 0.0.1
+ */
+
 import "./styles.css";
 
+/**
+ * Default configuration for nanoToast notifications.
+ *
+ * @type {Object}
+ * @property {string} position - Default position for the toast container.
+ * @property {number} duration - Default display duration of a toast in milliseconds.
+ * @property {boolean} closeable - Determines if the toast includes a close button.
+ * 
+ * @since 0.0.4
+ */
 let nanoToastDefaults = {
   position: "top-right",
   duration: 3000,
   closeable: false,
 };
 
+/**
+ * Duration for fade transitions in milliseconds.
+ * @constant {number}
+ * 
+ * @since 0.0.1
+ */
 const FADE_DUR = 500;
+
+/**
+ * DOM element ID for the toast container.
+ * @constant {string}
+ * 
+ * @since 0.0.1
+ */
 const CONTAINER_ID = "nanotoast-container";
+
+/**
+ * Reference to the toast container DOM element.
+ * @type {HTMLElement}
+ * 
+ * @since 0.0.1
+ */
 let toastContain;
 
+/**
+ * Creates or updates the toast container element.
+ *
+ * If the container does not exist, it creates a new container with the specified position.
+ * If the container already exists, it updates its position class.
+ *
+ * @param {string} position - Position for the toast container (e.g., "top-right", "bottom-left").
+ * 
+ * @since 0.0.1
+ */
 function createToastContainer(position) {
   if (!toastContain) {
     toastContain = document.createElement("div");
@@ -17,11 +67,28 @@ function createToastContainer(position) {
     toastContain.classList.add("nanotoast-container", position);
     document.body.appendChild(toastContain);
   } else {
-    // Update position if already exists
+    // Update container position if it already exists
     toastContain.className = `nanotoast-container ${position}`;
   }
 }
 
+/**
+ * Displays a toast notification.
+ *
+ * This function creates a toast element with the provided message, type, and options,
+ * then animates it into view. It handles auto-dismissal or manual closing based on options.
+ *
+ * @param {string} message - The primary message to display.
+ * @param {string} [type='info'] - The type of toast (e.g., "info", "success", "error", "warning", "loading").
+ * @param {Object} [options={}] - Additional options for the toast.
+ * @param {number} [options.duration] - How long the toast remains visible (milliseconds).
+ * @param {string} [options.position] - Position for the toast container.
+ * @param {boolean} [options.closeable] - If true, the toast includes a close button.
+ * @param {string} [options.description] - Optional description to display below the main message.
+ * @param {string|null} [options.id] - An optional identifier for updating an existing toast.
+ * 
+ * @since 0.0.1
+ */
 function showToast(message, type = "info", options = {}) {
   const {
     duration = nanoToastDefaults.duration,
@@ -37,21 +104,24 @@ function showToast(message, type = "info", options = {}) {
   EL.classList.add("nanotoast", type);
   EL.innerHTML = getToastHTML(message, description, type, closeable);
 
+  // Add slide-in animation class based on container position
   if (["top-right", "top-center", "top-left"].includes(position))
     EL.classList.add("toastDown");
   if (["bottom-right", "bottom-center", "bottom-left"].includes(position))
     EL.classList.add("toastUp");
 
-  if (id) EL.dataset.id = id; // Attach ID for updating
+  if (id) EL.dataset.id = id; // Attach identifier for later updates
 
   toastContain.prepend(EL);
   setTimeout(() => EL.classList.add("open"), 10);
 
+  // Automatically dismiss non-closeable toast after the specified duration
   if (!closeable) {
     setTimeout(() => EL.classList.remove("open"), duration);
     setTimeout(() => EL.remove(), duration + FADE_DUR);
   }
 
+  // Attach click event to close button for closeable toast
   if (closeable) {
     EL.querySelector(".nanotoast-close").addEventListener("click", () => {
       EL.classList.remove("open");
@@ -60,6 +130,20 @@ function showToast(message, type = "info", options = {}) {
   }
 }
 
+/**
+ * Generates the HTML content for a toast notification.
+ *
+ * This function returns a string of HTML that includes an icon, the message,
+ * an optional description, and a close button if the toast is closeable.
+ *
+ * @param {string} message - The main message to display.
+ * @param {string} description - An optional description text.
+ * @param {string} type - The type of toast (affects icon selection).
+ * @param {boolean} closeable - Determines if a close button is included.
+ * @returns {string} The HTML string for the toast.
+ * 
+ * @since 0.0.1
+ */
 function getToastHTML(message, description, type, closeable) {
   const icons = {
     close: `<svg data-slot="icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path clip-rule="evenodd" fill-rule="evenodd" d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06"/></svg>`,
@@ -89,7 +173,20 @@ function getToastHTML(message, description, type, closeable) {
   `;
 }
 
-// === PROMISE TOAST HANDLER ===
+/**
+ * Handles a promise by showing a loading toast and updating it on resolution.
+ *
+ * This function displays a loading toast immediately and then updates the toast with a
+ * success or error message depending on whether the promise resolves or rejects.
+ *
+ * @param {Promise} promise - The promise to monitor.
+ * @param {Object} messages - An object with messages for different states.
+ * @param {string|function} messages.loading - Message (or function returning a message) to show while pending.
+ * @param {string|function} messages.success - Message (or function returning a message) for a resolved promise.
+ * @param {string|function} messages.error - Message (or function returning a message) for a rejected promise.
+ * 
+ * @since 0.0.1
+ */
 function toastPromise(promise, { loading, success, error }) {
   const id = `toast-${Date.now()}`;
 
@@ -107,7 +204,18 @@ function toastPromise(promise, { loading, success, error }) {
     });
 }
 
-// === UPDATE TOAST FUNCTION ===
+/**
+ * Updates an existing toast notification.
+ *
+ * Finds the toast element by its identifier and updates its content and styling,
+ * then schedules it for removal.
+ *
+ * @param {string} id - The identifier of the toast to update.
+ * @param {string} message - The new message to display.
+ * @param {string} type - The new type for the toast (e.g., "success", "error").
+ * 
+ * @since 0.0.1
+ */
 function updateToast(id, message, type) {
   const toastEl = document.querySelector(`.nanotoast[data-id="${id}"]`);
   if (toastEl) {
@@ -123,8 +231,16 @@ function updateToast(id, message, type) {
   }
 }
 
-// === EXPORT TOAST ===
+/**
+ * Displays a default toast notification.
+ *
+ * @param {string} message - The message to display.
+ * @param {Object} [options={}] - Additional options for the toast.
+ * @returns {void}
+ */
 const toast = (message, options = {}) => showToast(message, "default", options);
+
+// Shortcut methods for displaying different toast types.
 toast.success = (message, options = {}) =>
   showToast(message, "success", options);
 toast.error = (message, options = {}) => showToast(message, "error", options);
@@ -135,11 +251,14 @@ toast.message = (message, options = {}) => showToast(message, "info", options);
 toast.promise = toastPromise;
 
 /**
- * Configure default toast settings (position, duration, closeable, etc.).
- * @param {Object} newDefaults - The new default settings to merge.
+ * Configures default settings for toast notifications.
+ *
+ * Merges the provided new defaults with the existing configuration.
+ *
+ * @param {Object} newDefaults - New default settings (e.g., position, duration, closeable).
+ * @returns {void}
  */
 toast.configure = function (newDefaults = {}) {
-  // Merge any new defaults
   nanoToastDefaults = { ...nanoToastDefaults, ...newDefaults };
 };
 
