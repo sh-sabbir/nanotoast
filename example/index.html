@@ -12,16 +12,25 @@
         console.log(NanoToast);
         switch (type) {
           case "success":
-            NanoToast.success("Success! Your data has been saved.",{closeable: true, position: "top-center"});
+            NanoToast.success("Success! Your data has been saved.", {
+              closeable: true,
+              position: "top-center",
+            });
             break;
           case "error":
-            NanoToast.error("Something went wrong! Try again.",{closeable: true});
+            NanoToast.error("Something went wrong! Try again.", {
+              closeable: true,
+            });
             break;
           case "warning":
-            NanoToast.warning("Warning! You're low on storage.",{closeable: true});
+            NanoToast.warning("Warning! You're low on storage.", {
+              closeable: true,
+            });
             break;
           case "info":
-            NanoToast.info("FYI: New features are available.",{closeable: true});
+            NanoToast.info("FYI: New features are available.", {
+              closeable: true,
+            });
             break;
           case "message":
             NanoToast.message("Event Created", {
@@ -137,16 +146,17 @@
       }
       .buttons-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-        gap: 1rem;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 0.5rem;
         margin: 2rem 0;
       }
       .toast-btn {
-        padding: 0.75rem 1rem;
+        padding: 0.75rem 0.75rem;
         font-size: 0.9rem;
         border: none;
         border-radius: 0.5rem;
-        color: #fff;
+        color: #222;
+        background: #fff;;
         cursor: pointer;
         transition: background 0.2s;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -158,21 +168,27 @@
       /* Different color buttons */
       .toast-btn.success {
         background: #4caf50; /* Green */
+        color: #fff;
       }
       .toast-btn.error {
         background: #f44336; /* Red */
+        color: #fff;
       }
       .toast-btn.warning {
         background: #ff9800; /* Orange */
+        color: #fff;
       }
       .toast-btn.info {
         background: #2196f3; /* Blue */
+        color: #fff;
       }
       .toast-btn.message {
         background: #9b5de5; /* Purple-ish */
+        color: #fff;
       }
       .toast-btn.promise {
         background: #374151; /* Gray */
+        color: #fff;
       }
 
       /* Code blocks */
@@ -227,23 +243,24 @@
       <h2 id="usage" class="section-title">Usage Examples</h2>
 
       <div class="buttons-grid">
+        <button class="toast-btn" onclick="showToast('default')">
+          Default
+        </button>
         <button class="toast-btn success" onclick="showToast('success')">
-          Success Toast
+          Success
         </button>
         <button class="toast-btn error" onclick="showToast('error')">
-          Error Toast
+          Error
         </button>
         <button class="toast-btn warning" onclick="showToast('warning')">
-          Warning Toast
+          Warning
         </button>
-        <button class="toast-btn info" onclick="showToast('info')">
-          Info Toast
-        </button>
+        <button class="toast-btn info" onclick="showToast('info')">Info</button>
         <button class="toast-btn message" onclick="showToast('message')">
-          Message + Desc
+          Description
         </button>
         <button class="toast-btn promise" onclick="showToast('promise')">
-          Promise Toast
+          Promise
         </button>
       </div>
 
