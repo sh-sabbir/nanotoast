@@ -17,7 +17,7 @@ import "./styles.css";
  * @property {string} position - Default position for the toast container.
  * @property {number} duration - Default display duration of a toast in milliseconds.
  * @property {boolean} closeable - Determines if the toast includes a close button.
- * 
+ *
  * @since 0.0.4
  */
 let nanoToastDefaults = {
@@ -29,7 +29,7 @@ let nanoToastDefaults = {
 /**
  * Duration for fade transitions in milliseconds.
  * @constant {number}
- * 
+ *
  * @since 0.0.1
  */
 const FADE_DUR = 500;
@@ -37,7 +37,7 @@ const FADE_DUR = 500;
 /**
  * DOM element ID for the toast container.
  * @constant {string}
- * 
+ *
  * @since 0.0.1
  */
 const CONTAINER_ID = "nanotoast-container";
@@ -45,7 +45,7 @@ const CONTAINER_ID = "nanotoast-container";
 /**
  * Reference to the toast container DOM element.
  * @type {HTMLElement}
- * 
+ *
  * @since 0.0.1
  */
 let toastContain;
@@ -57,7 +57,7 @@ let toastContain;
  * If the container already exists, it updates its position class.
  *
  * @param {string} position - Position for the toast container (e.g., "top-right", "bottom-left").
- * 
+ *
  * @since 0.0.1
  */
 function createToastContainer(position) {
@@ -86,7 +86,7 @@ function createToastContainer(position) {
  * @param {boolean} [options.closeable] - If true, the toast includes a close button.
  * @param {string} [options.description] - Optional description to display below the main message.
  * @param {string|null} [options.id] - An optional identifier for updating an existing toast.
- * 
+ *
  * @since 0.0.1
  */
 function showToast(message, type = "info", options = {}) {
@@ -141,7 +141,7 @@ function showToast(message, type = "info", options = {}) {
  * @param {string} type - The type of toast (affects icon selection).
  * @param {boolean} closeable - Determines if a close button is included.
  * @returns {string} The HTML string for the toast.
- * 
+ *
  * @since 0.0.1
  */
 function getToastHTML(message, description, type, closeable) {
@@ -155,22 +155,20 @@ function getToastHTML(message, description, type, closeable) {
     loading: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect fill="#555" height="6" opacity=".1" rx="3" ry="3" transform="rotate(-60 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".2" rx="3" ry="3" transform="rotate(-30 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".3" rx="3" ry="3" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".3" rx="3" ry="3" transform="rotate(30 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".4" rx="3" ry="3" transform="rotate(60 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".5" rx="3" ry="3" transform="rotate(90 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".6" rx="3" ry="3" transform="rotate(120 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".7" rx="3" ry="3" transform="rotate(150 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".8" rx="3" ry="3" transform="rotate(180 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".8" rx="3" ry="3" transform="rotate(210 50 50)" width="25" x="72" y="47"/><rect fill="#555" height="6" opacity=".9" rx="3" ry="3" transform="rotate(240 50 50)" width="25" x="72" y="47"/></svg>`,
   };
 
-  return `
-    <div class="nanotoast-icon">${icons[type] || "🔔"}</div>
-    <div class="nanotoast-content">
-      <div class="nanotoast-message">${message}</div>
-      ${
-        description
-          ? `<div class="nanotoast-description">${description}</div>`
-          : ""
-      }
-    </div>
-    ${
-      closeable
-        ? `<button class="nanotoast-close">${icons["close"]}</button>`
-        : ""
-    }
-  `;
+  const iconHTML = icons[type] || icons.default;
+  const htmlParts = [];
+
+  htmlParts.push(`<div class="nanotoast-icon">${iconHTML}</div>`);
+  htmlParts.push(`<div class="nanotoast-content">`);
+  htmlParts.push(`  <div class="nanotoast-message">${message}</div>`);
+  if (description) {
+    htmlParts.push(`  <div class="nanotoast-description">${description}</div>`);
+  }
+  htmlParts.push(`</div>`);
+  if (closeable) {
+    htmlParts.push(`<button class="nanotoast-close">${icons.close}</button>`);
+  }
+  return htmlParts.join("");
 }
 
 /**
@@ -184,7 +182,7 @@ function getToastHTML(message, description, type, closeable) {
  * @param {string|function} messages.loading - Message (or function returning a message) to show while pending.
  * @param {string|function} messages.success - Message (or function returning a message) for a resolved promise.
  * @param {string|function} messages.error - Message (or function returning a message) for a rejected promise.
- * 
+ *
  * @since 0.0.1
  */
 function toastPromise(promise, { loading, success, error }) {
@@ -213,7 +211,7 @@ function toastPromise(promise, { loading, success, error }) {
  * @param {string} id - The identifier of the toast to update.
  * @param {string} message - The new message to display.
  * @param {string} type - The new type for the toast (e.g., "success", "error").
- * 
+ *
  * @since 0.0.1
  */
 function updateToast(id, message, type) {
