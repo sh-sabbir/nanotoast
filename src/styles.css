@@ -36,7 +36,6 @@
   transform: translateX(-50%);
   align-items: center;
 }
-
 #nanotoast-container.bottom-center {
   bottom: 10px;
   left: 50%;
@@ -46,22 +45,67 @@
 
 /* Toast message */
 .nanotoast {
-  border-radius: 8px;
-  box-shadow: 0 4px 12px #0000001a;
-  font-size: 13px;
-  display: flex;
-  padding: 16px;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 12px #0000001a !important;
+  font-size: 13px !important;
+  display: flex !important;
+  padding: 16px !important;
   border: 1px solid hsl(0, 0%, 93%);
   background-color: white;
-  gap: 6px;
+  gap: 6px !important;
   color: #282828;
-  width: 325px;
-  transition: all 0.3s ease-in-out;
+  width: 325px !important;
+  transition: all 0.3s ease-in-out !important;
 }
 
 /* Open state */
 .nanotoast.open {
   opacity: 1;
+}
+
+
+/* Toast Types */
+.nanotoast.loading {
+  svg {
+    transform-origin: center;
+    animation: loading 0.75s step-end infinite;
+  }
+}
+.nanotoast.success {
+  background-color: #ebfef2;
+  color: hsl(140, 100%, 27%);
+  border: solid 1px hsl(145, 92%, 91%);
+
+  svg {
+    fill: hsl(140, 100%, 27%);
+  }
+}
+.nanotoast.error {
+  background-color: #fef0f0;
+  color: hsl(0, 100%, 27%);
+  border: solid 1px hsl(0, 92%, 91%);
+
+  svg {
+    fill: hsl(0, 100%, 27%);
+  }
+}
+.nanotoast.warning {
+  background-color: #fffdf0;
+  color: hsl(50, 100%, 27%);
+  border: solid 1px hsl(50, 92%, 91%);
+
+  svg {
+    fill: hsl(50, 100%, 27%);
+  }
+}
+.nanotoast.info {
+  background-color: #f0f8ff;
+  color: hsl(210, 100%, 27%);
+  border: solid 1px hsl(210, 92%, 91%);
+
+  svg {
+    fill: hsl(210, 100%, 27%);
+  }
 }
 
 /* Icon */
@@ -74,7 +118,6 @@
 .nanotoast-icon svg {
   width: 20px;
   height: 20px;
-  /* fill: #282828; */
 }
 
 /* Message & Description */
@@ -180,49 +223,5 @@
   }
   100% {
     transform: rotate(360deg);
-  }
-}
-
-/* Toast Types */
-.nanotoast.loading {
-  svg {
-    transform-origin: center;
-    animation: loading 0.75s step-end infinite;
-  }
-}
-.nanotoast.success {
-  background-color: #ebfef2;
-  color: hsl(140, 100%, 27%);
-  border: solid 1px hsl(145, 92%, 91%);
-
-  svg {
-    fill: hsl(140, 100%, 27%);
-  }
-}
-.nanotoast.error {
-  background-color: #fef0f0;
-  color: hsl(0, 100%, 27%);
-  border: solid 1px hsl(0, 92%, 91%);
-
-  svg {
-    fill: hsl(0, 100%, 27%);
-  }
-}
-.nanotoast.warning {
-  background-color: #fffdf0;
-  color: hsl(50, 100%, 27%);
-  border: solid 1px hsl(50, 92%, 91%);
-
-  svg {
-    fill: hsl(50, 100%, 27%);
-  }
-}
-.nanotoast.info {
-  background-color: #f0f8ff;
-  color: hsl(210, 100%, 27%);
-  border: solid 1px hsl(210, 92%, 91%);
-
-  svg {
-    fill: hsl(210, 100%, 27%);
   }
 }

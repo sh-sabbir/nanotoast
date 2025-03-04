@@ -94,15 +94,16 @@ function toastPromise(promise, { loading, success, error }) {
   const id = `toast-${Date.now()}`;
 
   // Show loading toast
-  showToast(loading, "loading", { id, closeable: false });
+  showToast(loading, "loading", { id, closeable: true });
 
   promise
     .then((data) => {
       const message = typeof success === "function" ? success(data) : success;
       updateToast(id, message, "success");
     })
-    .catch(() => {
-      updateToast(id, error, "error");
+    .catch((data) => {
+      const message = typeof error === "function" ? error(data) : error;
+      updateToast(id, message, "error");
     });
 }
 
