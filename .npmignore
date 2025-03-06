@@ -1,0 +1,9 @@
+# .npmignore
+
+# Exclude development files
+example/
+src/
+.github/
+build.js
+pre-commit
+.DS_Store

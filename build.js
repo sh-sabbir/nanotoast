@@ -1,11 +1,19 @@
 #!/usr/bin/env node
-import { build } from "esbuild";
+import { build, transform } from "esbuild";
 import fs from "fs";
 import path from "path";
 import ora from "ora";
 
 function delay(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function getMinifiedFooter(footerCode) {
+  const result = await transform(footerCode, {
+    minify: true,
+    loader: "js",
+  });
+  return result.code;
 }
 
 async function buildAll() {
@@ -32,27 +40,31 @@ async function buildAll() {
 
     // Build the IIFE/UMD bundle.
     spinner.start("Building IIFE/UMD bundle...");
+
+    spinner.text = "Minifying footer...";
+
+    const footerCode = `
+      (function() {
+        var realExport = NanoToast.default;
+        if (realExport) {
+          // Copy all own property names from NanoToast onto the function
+          Object.getOwnPropertyNames(NanoToast).forEach(function(key) {
+            if (key !== "default") {
+              realExport[key] = NanoToast[key];
+            }
+          });
+          NanoToast = realExport;
+        }
+      })();
+    `;
+    const minifiedFooter = await getMinifiedFooter(footerCode);
+
     await build({
       ...baseConfig,
       outfile: "dist/nanotoast.js",
       format: "iife",
       globalName: "NanoToast",
-      footer: {
-        js: `
-          (function() {
-            var realExport = NanoToast.default;
-            if (realExport) {
-              // Copy all own property names from NanoToast onto the function
-              Object.getOwnPropertyNames(NanoToast).forEach(function(key) {
-                if (key !== "default") {
-                  realExport[key] = NanoToast[key];
-                }
-              });
-              NanoToast = realExport;
-            }
-          })();
-        `,
-      },
+      footer: { js: minifiedFooter },
     });
     await delay(500);
     spinner.succeed("IIFE/UMD bundle built successfully.");
