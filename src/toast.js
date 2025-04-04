@@ -171,7 +171,7 @@ function getToastHTML(message, description, type, closeable) {
   }
   htmlParts.push(`</div>`);
   if (closeable) {
-    htmlParts.push(`<button class="nanotoast-close">${icons.close}</button>`);
+    htmlParts.push(`<button class="nanotoast-close">${getIcon(icons.close)}</button>`);
   }
   return htmlParts.join("");
 }
